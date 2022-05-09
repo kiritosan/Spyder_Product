@@ -12,7 +12,7 @@ def fetch(url):
     
 # 传入商品页url purl 获取商品详细信息和tags 然后做成dataframe格式的商品信息扩展表格
 def fetch_pdetail(purl):
-    print('当前商品详情页url为{}'.format(purl))
+    print(f'当前商品详情页url为{purl}')
     print('从商品详情页获得描述和标签')
     r = fetch(purl)
     print('抓取purl成功')
@@ -54,7 +54,7 @@ data = pd.DataFrame(data,columns = ['名称','图片','描述','标签'])
 for categorie in categories:
     # 构建不同分类的网址
     url = ori_url.format(categorie = categorie)
-    print('当前正在抓取{}分类'.format(categorie))
+    print(f'当前正在抓取{categorie}分类')
     for page in itertools.count(1):
         url0 = url + str(page)
         print(url0)
@@ -66,5 +66,5 @@ for categorie in categories:
         print('--------------------该页提取数据完成--------------------')
         data = pd.concat([data, data0], axis=0, ignore_index=True)
         print('-----------------------数据已存储-----------------------')
-        
+
 data.to_csv('Product.csv',index=0,encoding="utf_8_sig")
